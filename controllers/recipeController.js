@@ -11,12 +11,13 @@ router.get("/", function(req, res) {
     res.render("index");
 });
 
-router.get('/recipes/indRecipe', function(req, res){
-    res.send("create 'indRecipe.ejs' file to render");
+router.get('/recipes/indRecipe/:id', function(req, res){
+    res.render("indRecipe");
 });
 
 router.get('/recipes/create', function(req, res){
-    res.send("create 'createRecipe.ejs file to render");
+    //    res.send("create 'createRecipe.ejs file to render");
+    res.render("create");
 });
 
 router.post("/recipes/create", function(req, res) {
@@ -54,7 +55,7 @@ router.get('/users/login', function(req,res){
 router.post('/users/register', passport.authenticate('local-signup',    
 {
         successRedirect: '/users/dashboard',
-        failureRedirect: '/register'
+        failureRedirect: '/users/register'
     }
 ));
 

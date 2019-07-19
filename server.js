@@ -35,6 +35,9 @@ app.use(routes);
 //load passport strategies
 require('./config/passport.js')(passport, db.user);
 
+// ! Statis directory
+app.use(express.static("public"));
+
 db.sequelize.sync().then(function () {
     app.listen(PORT, console.log(`Server started on port ${PORT}`));
 }).catch(function (err) {
