@@ -7,11 +7,7 @@ const session = require('express-session');
 
 // ** USE INDEX.EJS
 const db = require('./models');
-
 const app = express();
-
-// ** PASSPORT CONFIG
-require('./config/passport')(passport);
 
 const PORT = process.env.PORT || 8080;
 
@@ -20,52 +16,24 @@ app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
 // **/BODYPARSER
-app.use(express.urlencoded({
-    extended: true
-}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// ? Import routes and give the sever access to them     NEEDED????
-var routes = require("./controllers/recipeController.js")
-app.use(routes);
+
 
 // ** FOR PASSPORT USING EXPRESS SESSION
-app.use(session({
-    secret: 'keyboard cat',
-    resave: true,
-    saveUninitialized: true
-})); // session secret
+app.use(session({ secret: 'keyboard cat', resave: true,
+saveUninitialized: true })); // session secret
 
 // ** PASSPORT MIDDLEWARE
 app.use(passport.initialize());
 app.use(passport.session()); // for persistent login
 
-// ** CONNECT FLASH
-app.use(flash());
-
-// ** GLOBAL VARS
-// app.use((err, req, res, next) => {
-//     res.locals.success_msg = req.flash('success_msg');
-//     res.locals.error_msg = req.flash('error_msg');
-//     res.locals.error = req.flash('error');
-//     console.log(err);
-//     next();
-// });
-
-// ROUTES
-app.use('/users', require('./controllers/users.js'));
-
-
-//Sets Handlebars 
-// var exphbs = require("express-handlebars");
-// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
-
-// ! Statis directory   NEEDED????
-app.use(express.static("public"));
-
-// ! Import routes and give the sever access to them     NEEDED????
-var routes = require("./controllers/recipeController.js");
+// ? Import routes and give the sever access to them     NEEDED????
+var routes = require("./controllers/recipeController.js")
 app.use(routes);
+
+//load passport strategies
+require('./config/passport.js')(passport, db.user);
 
 db.sequelize.sync().then(function () {
     app.listen(PORT, console.log(`Server started on port ${PORT}`));
