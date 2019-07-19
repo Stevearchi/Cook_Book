@@ -16,10 +16,11 @@ router.get('/recipes/indRecipe', function(req, res){
 });
 
 router.get('/recipes/create', function(req, res){
-    res.send("create 'createRecipe.ejs file to render");
+    res.render("createRecipe");
 });
 
 router.post("/recipes/create", function(req, res) {
+    console.log(req.body)
     db.Recipe.create(req.body).then(function(data) {
         res.json(data);
     })
