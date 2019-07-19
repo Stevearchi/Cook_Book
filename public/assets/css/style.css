@@ -5,7 +5,7 @@ body {
     height: 650px;
 }
 #searchButton{
-     background-color: #343a40;
+     background-color: #343a40 !important;
 }
 
 #indBody{
@@ -33,4 +33,4 @@ body {
         width: 120px;
         height: 200px;
     }
-}
+} 
