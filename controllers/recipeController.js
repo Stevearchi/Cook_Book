@@ -30,7 +30,7 @@ router.get("/recipes/viewall", function(req, res){
 });
 
 // ** To delete a recipe
-router.delete("/recipe/delete/:id", function(req, res) {
+router.delete("/recipes/delete/:id", function(req, res) {
     var condition = "id = " + req.params.id;
 
     recipe.delete(condition, function(result) {
@@ -51,8 +51,8 @@ router.get('/users/login', function(req,res){
     res.render('login'); 
 });
 
-router.post('/users/register', passport.authenticate('local-signup',
-    {
+router.post('/users/register', passport.authenticate('local-signup',    
+{
         successRedirect: '/users/dashboard',
         failureRedirect: '/register'
     }
