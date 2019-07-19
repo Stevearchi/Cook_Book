@@ -27,7 +27,7 @@ router.post("/recipes/create", function(req, res) {
 });
 
 router.get("/recipes/viewall", function(req, res){
-    res.send("create 'viewAll.ejs' file to render");
+    res.render("viewAll");
 });
 
 // ** To delete a recipe
@@ -82,6 +82,9 @@ function isLoggedIn(req, res, next) {
 
     res.redirect('/users/login');
 }
+
+//calling one recipe for indRecipe page
+
 
 // Export routes for server.js to use
 module.exports = router;
