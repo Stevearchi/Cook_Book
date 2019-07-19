@@ -55,12 +55,7 @@ app.use(flash());
 app.use('/users', require('./controllers/users.js'));
 
 
-//Sets Handlebars 
-// var exphbs = require("express-handlebars");
-// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
-
-// ! Statis directory   NEEDED????
+// ! Statis directory
 app.use(express.static("public"));
 
 // ! Import routes and give the sever access to them     NEEDED????
