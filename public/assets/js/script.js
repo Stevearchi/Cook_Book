@@ -93,4 +93,32 @@ var addCols = function (arr) {
     });
 };
 
+// Adding a new recipe in the Create page
 
+// Click event
+$("#create").on("click", function(event) {
+    event.preventDefault();   
+    // Making new recipe object
+
+    var newRecipe = {
+        recipe_name: $("#recipeName").val().trim(),
+        author_name: 'TESTING',
+        ingredients: $("#ingredients").val().trim(),
+        directions: $("#directions").val().trim(),
+        image: $("#recipeImage").val().trim()
+    };
+   // AJAX POST - request with jQuery
+    $.post("/recipes/create", newRecipe)
+        .then(function(data) {
+
+            alert("Adding new recipe " + data.recipe_name);
+        });
+
+   // Empty input fields after submitting
+    $("#recipeName").val("");
+    // $("#author-name").val("");
+    $("#ingredients").val("");
+    // $("#measurements").val("");
+    $("#directions").val("");
+    $("#recipeImage").val("");
+});

@@ -11,4 +11,4 @@ $.get("/recipes/indRecipe/"  + id, function(data) {
     $('#author-name').append(data.author_name);
     $('#recipe-ingred').append(data.ingredients);
     $('#recipe-direct').append(data.directions);
-}); 
+});
