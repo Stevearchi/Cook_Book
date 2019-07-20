@@ -1,5 +1,6 @@
 var express = require("express");
 var passport = require("passport");
+const Sequelize = require('sequelize');
 
 var router = express.Router();
 
@@ -7,21 +8,36 @@ var router = express.Router();
 var db = require("../models");
 
 // ** Create all our routes and set up logic within those routes where required.
-router.get("/", function(req, res) {
+router.get("/", function (req, res) {
     res.render("index");
 });
 
-router.get('/recipes/indRecipe/:id', function(req, res){
+router.get('/recipes/indRecipe/:id', function (req, res) {
     res.render("indRecipe");
 });
 
-router.get('/recipes/create', function(req, res){
+router.get('/recipes/searchedRecipes/:searchQuery', function (req, res) {
+    console.log("TEST============================================", req.params.searchQuery)
+    db.Recipe.findAll({
+        where: {
+            recipe_name: Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('recipe_name')), 'LIKE', '%' + req.params.searchQuery + '%')
+        }
+    })
+        .then(function (recipes) {
+            var searchedRecipes = {
+                recipe: recipes
+            }
+            res.json(searchedRecipes);
+        })
+});
+
+router.get('/recipes/create', function (req, res) {
     //    res.send("create 'createRecipe.ejs file to render");
     res.render("create");
 });
 
-router.post("/recipes/create", function(req, res) {
-    db.Recipe.create(req.body).then(function(data) {
+router.post("/recipes/create", function (req, res) {
+    db.Recipe.create(req.body).then(function (data) {
         res.json(data);
     })
 });
@@ -31,10 +47,10 @@ router.get("/recipes/viewall", function(req, res){
 });
 
 // ** To delete a recipe
-router.delete("/recipe/delete/:id", function(req, res) {
+router.delete("/recipes/delete/:id", function (req, res) {
     var condition = "id = " + req.params.id;
 
-    recipe.delete(condition, function(result) {
+    recipe.delete(condition, function (result) {
         if (result.affectedRows == 0) {
             // */ If no rows were changed then the ID must not exist
             return res.status(404).end();
@@ -43,31 +59,32 @@ router.delete("/recipe/delete/:id", function(req, res) {
         }
     });
 });
+
 // ===================== AUTHENTICATION ROUTES ============================
-router.get('/users/register', function(req,res){
-    res.render('register'); 
+router.get('/users/register', function (req, res) {
+    res.render('register');
 });
 
-router.get('/users/login', function(req,res){
-    res.render('login'); 
+router.get('/users/login', function (req, res) {
+    res.render('login');
 });
 
 router.post('/users/register', passport.authenticate('local-signup',
     {
         successRedirect: '/users/dashboard',
-        failureRedirect: '/register'
+        failureRedirect: '/users/register'
     }
 ));
 
-router.get('/users/dashboard', isLoggedIn, function(req,res){
-    res.render('dashboard'); 
+router.get('/users/dashboard', isLoggedIn, function (req, res) {
+    res.render('dashboard');
 });
 
-router.get('/users/logout', function(req,res){
-    req.session.destroy(function(err) {
-    res.redirect('/');
+router.get('/users/logout', function (req, res) {
+    req.session.destroy(function (err) {
+        res.redirect('/');
     });
-  });
+});
 
 router.post('/users/login', passport.authenticate('local-signin',
     {
@@ -82,9 +99,6 @@ function isLoggedIn(req, res, next) {
 
     res.redirect('/users/login');
 }
-
-//calling one recipe for indRecipe page
-
 
 // Export routes for server.js to use
 module.exports = router;
