@@ -18,18 +18,18 @@ module.exports = function (sequelize, DataTypes) { // ** Makes the Recipe Model 
             }
         },
         ingredients: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             notEmpty: true
         },
         directions: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 len: [6]
             }
         },
         image: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
         }
         // status: {
         //     type: DataTypes.ENUM('active', 'inactive'),

@@ -5,7 +5,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 
-// ** USE INDEX.EJS
+// ** USE INDEX.EJS 
 const db = require('./models');
 const app = express();
 
