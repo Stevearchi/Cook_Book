@@ -9,12 +9,14 @@ $("#search-button").on("click", function (event) {
     console.log("Button Works!!!")
     var search = $("#searchQuery").val().trim();
     if (search !== "") {
+        $("#contentPanel").empty();
         $("#pheader").empty();
         $("#tableBody").empty();
 
         showResults(search);
         $("#searchQuery").val("");
     } else {
+        $("#contentPanel").empty();
         $("#pheader").empty();
         $("#tableBody").empty();
         errorDiv.append(errorH3 + "Please type a recipe.</h3>");
@@ -37,28 +39,28 @@ function showResults(search) {
             $("<th>").text("Image:").css("font-weight", "Bold"),
         )
         if (results.length > 0) {
-            $("#pheader").append(newHeader);
-
+            
             addCols(results);
-            for (var i = 0; i < results.length; i++) {
-                var recipeName = results[i].recipe_name;
-                var authorName = results[i].author_name;
-                var ingredients = results[i].ingredients;
-                var directions = results[i].directions;
-                var image = results[i].image;
+            // $("#pheader").append(newHeader);
+            // for (var i = 0; i < results.length; i++) {
+            //     var recipeName = results[i].recipe_name;
+            //     var authorName = results[i].author_name;
+            //     var ingredients = results[i].ingredients;
+            //     var directions = results[i].directions;
+            //     var image = results[i].image;
 
-                var newRow = $("<tr class='newrow'>").append(
-                    $("<td>").text(recipeName),
-                    $("<td>").text(authorName),
-                    $("<td>").text(ingredients),
-                    $("<td>").text(directions),
-                    $("<td>").html("<img id='recipeImage' class='recipeImg' src=" + image + ">"),
-                )
-                newRow.attr("data-name", results[i].id)
+            //     var newRow = $("<tr class='newrow'>").append(
+            //         $("<td>").text(recipeName),
+            //         $("<td>").text(authorName),
+            //         $("<td>").text(ingredients),
+            //         $("<td>").text(directions),
+            //         $("<td>").html("<img id='recipeImage' class='recipeImg' src=" + image + ">"),
+            //     )
+            //     newRow.attr("data-name", results[i].id)
 
-                $("#tableBody").append(newRow);
+            //     $("#tableBody").append(newRow);
 
-            }
+            // }
         } else {
             return errorDiv.append(errorH3 + "Sorry, no matching recipes were found.</h3>");
         }

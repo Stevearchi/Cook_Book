@@ -30,6 +30,13 @@ body {
     margin: auto;
     margin-bottom: 50px;
 }
+
+.myform{
+    z-index: 100;
+    display: block;
+    margin-right: auto;
+}
+
 #searchButton {
     background-color: #343a40 !important;
 }
