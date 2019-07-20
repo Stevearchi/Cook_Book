@@ -21,7 +21,7 @@ router.get('/recipes/indRecipe/:id', function(req, res){
             id: req.params.id
         }
     }).then(function (dbRecipe) {
-        res.json(dbRecipe);
+        res.render("indRecipe", dbRecipe);
     });
     
 
