@@ -12,9 +12,28 @@ router.get("/", function (req, res) {
     res.render("index");
 });
 
-router.get('/recipes/indRecipe/:id', function (req, res) {
-    res.render("indRecipe");
+
+//Grab one recipe for indRecipe page
+router.get('/recipes/indRecipe/:id', function(req, res){
+    
+    db.Recipe.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(function (data) {
+        console.log("====DATA====", data);
+        res.render("indRecipe", {data: "data"});
+    });
+    
+
 });
+
+
+router.get('/recipes/indRecipe/', function(req, res){
+    res.render('indRecipe')
+})
+
+
 
 router.get('/recipes/searchedRecipes/:searchQuery', function (req, res) {
     console.log("TEST============================================", req.params.searchQuery)

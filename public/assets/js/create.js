@@ -6,14 +6,15 @@ $("#create").on("click", function(event) {
 
     // Making new recipe object
     var newRecipe = {
-        recipe_name: $("#recipe-name").val().trim(),
-        author_name: $("#author-name").val().trim(),
+        recipe_name: $("#recipeName").val().trim(),
+        // author_name: ,
         ingredients: $("#ingredients").val().trim(),
         measurements: $("#measurements").val().trim(),
         directions: $("#directions").val().trim(),
-        image: $("#image").val().trim()
+        image: $("#recipeImage").val().trim()
+        
     };
-
+    console.log(newRecipe);
    // AJAX POST - request with jQuery
     $.post("/api/#", newRecipe)
         .then(function(data) {
