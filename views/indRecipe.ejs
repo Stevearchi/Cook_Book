@@ -1,44 +1,19 @@
- <!-- Nav Bar -->
 
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
-    <a class="navbar-brand" href="/">Cook Book</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
-        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor02">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/recipes/viewall">View Recipes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/recipes/create">Add a Recipe</a>
-            </li>
-            <li class="nav-item float-right">
-                <a class="nav-link" href="/users/login">Login</a>
-            </li>
-        </ul>
-
-    </div>
-</nav>
-</div>
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <img src="" id = "recipe_image">
+        <div class="col-md-4" id = "recipe-image">
+  
         </div>
         <div class="col-md-8">
 
             <div class="card text-white bg-primary mb-3 backColor" style="max-width: 20rem;">
-                <div class="card-header" id="recipe-title"></div>
+                <span class="card-header" id="recipe-name"></span> by <span id="author-name"></span>
+
                 <div class="card-body">
                     <h4 class="card-title">Ingredients</h4>
                     <div class="card-text" id="recipe-ingred"></div>
                     <h4 class="card-title">Instructions</h4>
-                    <div class="card-text" id="recipe-instruc"></div>
+                    <div class="card-text" id="recipe-direct"></div>
                 </div>
             </div>
         </div>

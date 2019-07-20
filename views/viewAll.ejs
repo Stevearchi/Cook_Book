@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">Cook Book</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,8 +22,25 @@
         </ul>
 
     </div>
-</nav>
+</nav> -->
 
 <div id = "viewAll">
+
+    
+router.get('/recipes/searchedRecipes/:searchQuery', function (req, res) {
+    console.log("TEST============================================", req.params.searchQuery)
+    db.Recipe.findAll({
+        where: {
+            recipe_name: Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('recipe_name')), 'LIKE', '%' + req.params.searchQuery + '%')
+        }
+    })
+        .then(function (recipes) {
+            var searchedRecipes = {
+                recipe: recipes
+            }
+            res.json(searchedRecipes);
+        })
+});
+
 
 </div>

@@ -1,5 +1,5 @@
 <!-- Nav Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">Cook Book</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,7 @@
         </ul>
 
     </div>
-</nav>
+</nav> -->
 <br /><br /><br />
 <div class="container backColor text-light">
     <form>
@@ -34,22 +34,18 @@
                 <textarea class="form-control" id="recipeName" rows="1"></textarea>
             </div>
             <div class="form-group">
-                <label for="exampleTextarea">List your ingredients here</label>
-                <textarea class="form-control" id="ingArea" rows="3"></textarea>
+                <label for="ingredients">List your ingredients here</label>
+                <textarea class="form-control" id="ingredients" rows="3"></textarea>
             </div>
             <div class="form-group">
-                <label for="exampleTextarea">List your directions here</label>
-                <textarea class="form-control" id="directArea" rows="3"></textarea>
+                <label for="directions">List your directions here</label>
+                <textarea class="form-control" id="directions" rows="3"></textarea>
             </div>
             <div class="form-group">
                 <label for="recipeImage">Picture of your deliciousness</label>
                 <textarea class="form-control" id="recipeImage" rows="1" placeholder="Enter a URL for an image of your recipe"></textarea>
             </div>
-            <div class="form-group">
-                <label for="authorName">Author</label>
-                <textarea class="form-control" id="authorName" rows="1" placeholder="Enter a URL for an image of your recipe"></textarea>
-            </div>
-            <button type="submit" id= "create " class="btn btn-primary rounded-pill">Submit</button>
+            <button type="submit" class="btn btn-primary rounded-pill" id = "create">Submit</button>
             <br /><br />
 
         </fieldset>
