@@ -20,8 +20,9 @@ router.get('/recipes/indRecipe/:id', function(req, res){
         where: {
             id: req.params.id
         }
-    }).then(function (dbRecipe) {
-        res.render("indRecipe", dbRecipe);
+    }).then(function (data) {
+        console.log("====DATA====", data);
+        res.render("indRecipe", {data: "data"});
     });
     
 
