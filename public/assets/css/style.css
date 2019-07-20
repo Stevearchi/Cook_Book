@@ -11,6 +11,15 @@ body {
     background-size: cover;
 }
 
+.recipeImg{
+    height: 200px;
+    width: 200px;
+}
+
+.recipe-card{
+    margin-bottom: 40px;
+}
+
 #searchButton {
     background-color: #343a40 !important;
 }
