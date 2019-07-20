@@ -20,6 +20,12 @@ body {
     margin-left: -3em;
 }
 
+#recipeImage{
+    height: 200px;
+    width: auto;
+}
+
+
 
 @media screen and (max-width: 768px){
     #recipe_image {
