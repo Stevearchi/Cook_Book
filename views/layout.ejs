@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+
     <link rel="stylesheet" href="../assets/css/style.css">
 
     <!-- <style>
@@ -50,9 +51,34 @@
 
 <body>
     <div class="container">
+        <!-- Nav Bar -->
+        <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Cook Book</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/recipes/viewall">View Recipes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/recipes/create">Add a Recipe</a>
+                    </li>
+                    <li class="nav-item float-right">
+                        <a class="nav-link" href="/users/login">Login</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
         <%- body %>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -62,8 +88,10 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
+
+
     <script type="text/javascript" src="../assets/js/script.js"></script>
-    
+
 </body>
 
 </html>
