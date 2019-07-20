@@ -11,9 +11,25 @@ router.get("/", function(req, res) {
     res.render("index");
 });
 
+
+//Grab one recipe for indRecipe page
 router.get('/recipes/indRecipe/:id', function(req, res){
-    res.render("indRecipe");
+    
+    db.Recipe.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(function (dbRecipe) {
+        res.json(dbRecipe);
+    });
+    
+    // res.render("indRecipe");
 });
+
+
+router.get('/recipes/indRecipe/', function(req, res){
+    res.render('indRecipe')
+})
 
 router.get('/recipes/create', function(req, res){
     //    res.send("create 'createRecipe.ejs file to render");
@@ -83,7 +99,6 @@ function isLoggedIn(req, res, next) {
     res.redirect('/users/login');
 }
 
-//calling one recipe for indRecipe page
 
 
 // Export routes for server.js to use
