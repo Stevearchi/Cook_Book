@@ -42,8 +42,8 @@ router.post("/recipes/create", function (req, res) {
     })
 });
 
-router.get("/recipes/viewall", function (req, res) {
-    res.send("create 'viewAll.ejs' file to render");
+router.get("/recipes/viewall", function(req, res){
+    res.render("viewAll");
 });
 
 // ** To delete a recipe
@@ -59,6 +59,7 @@ router.delete("/recipes/delete/:id", function (req, res) {
         }
     });
 });
+
 // ===================== AUTHENTICATION ROUTES ============================
 router.get('/users/register', function (req, res) {
     res.render('register');
