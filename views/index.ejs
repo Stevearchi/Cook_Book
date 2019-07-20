@@ -1,5 +1,5 @@
 <!-- Nav Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">Cook Book</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,33 +23,47 @@
         </ul>
 
     </div>
-</nav>
+</nav> -->
 
-<!-- Search field -->
-
+<!-- ======================= SEARCH FIELD ============================= -->
+<!-- <div id="delete-breaks">
+    <br><br><br><br>
+</div> -->
 <div class="container">
-    <div class = "row">
-        <div class = "col-auto mx-auto mt-5">
-            <form action='/recipes/searchedRecipes' method='GET'>
-                <fieldset>
-                        <input type="text" id="searchQuery" placeholder="recipe" size='70'> &nbsp;
-                        <button id = "search-button" class = "btn btn-primary rounded-pill backColor">Search</button>
-                </fieldset>
-            </form>
+    <div class="row align-middle">
+        <div class="col-auto mx-auto mt-5">
+                <form class="form-inline my-2 my-lg-0" action='/recipes/searchedRecipes' method='GET'>
+                    <fieldset>
+                        <input class="form-control mr-sm-2" type="text" id="searchQuery" placeholder="Type your craving"
+                            size='70'> &nbsp;
+                        <button id="search-button" class="btn btn-primary">Search</button>
+                    </fieldset>
+                </form>
         </div>
     </div>
-<!-- ================= SEARCH RESULTS ROW ======================== -->
-    <div class = "row">
-        <div class = "col-md mx-auto">
 
+
+    <!-- ================= SEARCH RESULTS ROW ======================== -->
+    <div class="row">
+        <div class="col-md mx-auto" id="results-col">
+            <div id="err-message"></div>
             <table class="table table-striped table-hover text-light" id='table'>
                 <thead id="pheader"></thead>
 
                 <tbody id="tableBody"></tbody>
-                
+
             </table>
         </div>
     </div>
-</div>
+    <!-- <div class="row">
+        <h2>Add some cards..</h2>
+        <form class="form-inline">
+            <input class="form-control col-1" type="text" id="numPanels" value="17" maxlength="3" />
+            <button type="button" class="btn btn-info" id="btnGen">Generate</button>
+        </form>
+        <br>
+        <div class="row" id="contentPanel">
 
-  
+        </div>
+    </div> -->
+</div>
