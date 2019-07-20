@@ -12,31 +12,27 @@ router.get("/", function (req, res) {
     res.render("index");
 });
 
-
 //Grab one recipe for indRecipe page
 router.get('/recipes/indRecipe/:id', function(req, res){
+    // console.log("req==================================> ", req);
+    // console.log("res==================================>", res);
     
     db.Recipe.findOne({
-        where: {
+        where: { 
             id: req.params.id
         }
     }).then(function (data) {
-        console.log("====DATA====", data);
+        // console.log("====DATA====", data);
         res.render("indRecipe", {data: "data"});
     });
-    
-
 });
-
 
 router.get('/recipes/indRecipe/', function(req, res){
     res.render('indRecipe')
 })
 
-
-
 router.get('/recipes/searchedRecipes/:searchQuery', function (req, res) {
-    console.log("TEST============================================", req.params.searchQuery)
+    // console.log("TEST============================================", req.params.searchQuery)
     db.Recipe.findAll({
         where: {
             recipe_name: Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('recipe_name')), 'LIKE', '%' + req.params.searchQuery + '%')

@@ -21,7 +21,6 @@ $("#search-button").on("click", function (event) {
         $("#tableBody").empty();
         errorDiv.append(errorH3 + "Please type a recipe.</h3>");
     }
-
 });
 
 function showResults(search) {
@@ -41,33 +40,11 @@ function showResults(search) {
         if (results.length > 0) {
             
             addCols(results);
-            // $("#pheader").append(newHeader);
-            // for (var i = 0; i < results.length; i++) {
-            //     var recipeName = results[i].recipe_name;
-            //     var authorName = results[i].author_name;
-            //     var ingredients = results[i].ingredients;
-            //     var directions = results[i].directions;
-            //     var image = results[i].image;
-
-            //     var newRow = $("<tr class='newrow'>").append(
-            //         $("<td>").text(recipeName),
-            //         $("<td>").text(authorName),
-            //         $("<td>").text(ingredients),
-            //         $("<td>").text(directions),
-            //         $("<td>").html("<img id='recipeImage' class='recipeImg' src=" + image + ">"),
-            //     )
-            //     newRow.attr("data-name", results[i].id)
-
-            //     $("#tableBody").append(newRow);
-
-            // }
         } else {
             return errorDiv.append(errorH3 + "Sorry, no matching recipes were found.</h3>");
         }
-
-
     });
-}
+};
 
 var addCols = function (arr) {
     for (var i = 0; i < arr.length; i++) {
@@ -85,12 +62,21 @@ var addCols = function (arr) {
         myCol.appendTo('#contentPanel');
     }
 
-
     $('.close').on('click', function (e) {
         e.stopPropagation();
         var $target = $(this).parents('.col-sm-3');
         $target.hide('slow', function () { $target.remove(); });
     });
 };
+
+function goToOne() {
+
+// displayOne route loads displayOne.html
+app.get("/cms", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public"));
+  });
+    
+};
+  
 
 

@@ -6,7 +6,7 @@ module.exports = function (sequelize, DataTypes) { // ** Makes the Recipe Model 
             notEmpty: true,
             allowNull: false,
             validate: {
-                notIn: [" "]
+                notIn: [" "] 
             }
         },
         author_name: {
