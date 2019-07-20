@@ -19,7 +19,17 @@ body {
 .recipe-card{
     margin-bottom: 40px;
 }
+/* 
+#contain-carousel{
+    height: 200px;
+} */
 
+.d-block{
+    height: 400px;
+    width: auto;
+    margin: auto;
+    margin-bottom: 50px;
+}
 #searchButton {
     background-color: #343a40 !important;
 }
