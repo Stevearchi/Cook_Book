@@ -27,20 +27,8 @@
 <div id = "viewAll">
 
     
-router.get('/recipes/searchedRecipes/:searchQuery', function (req, res) {
-    console.log("TEST============================================", req.params.searchQuery)
-    db.Recipe.findAll({
-        where: {
-            recipe_name: Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('recipe_name')), 'LIKE', '%' + req.params.searchQuery + '%')
-        }
-    })
-        .then(function (recipes) {
-            var searchedRecipes = {
-                recipe: recipes
-            }
-            res.json(searchedRecipes);
-        })
-});
 
 
 </div>
+
+<script = "../assets/js/viewAll.js"></script>
