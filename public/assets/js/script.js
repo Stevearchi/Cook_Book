@@ -3,18 +3,45 @@ var errorDiv = $("#err-message");
 var errorH3 = "<br><h3 class='text-center text-light'>";
 
 // Click event for View All Recipes
-document.getElementById("#viewall").addEventListener("click", )
+// document.getElementById("#view-all").addEventListener("click", )
+var res;
 
 $(document).ready(function() {
-    ​
-        $("#viewall").on("click", function() {
-          alert("I've been clicked!");
-        //   $.get('/recipes/viewall').then(function(data) {
-        //         res.render(addCols(dbrecipe));
-            })
-        });
-    ​
+  $("#view-all").on("click", function() {
+    // alert("View Recipes has been clicked!");
+    $.when(
+      $.get('/recipes/viewall', function(data) {
+        res = data;
+      }),
+      $.get('/recipes/viewall/render')
+      ).then(function() {
+        showResults(res);
+    })
+  });
+});
+
+// document.onmouseup = function() {
+//   alert("onmouseup!!!!!!!!!!!!!!")
+//   $.get('/recipes/viewall/render').then(function() {
+//     showResults(res);
+//   });
+// };
+
+
+// function onmouseup () {
+//   document.getElementById
+// }
+
+
+
+//Click event for selected recipe from search results
+$(document).ready(function() {
+    $("#selected-recipe").on("click", function() {
+        alert("Go to Full Recipe Button has been clicked!!!!!!!!!!!!!!!!");
+
     });
+});
+
 // Search Results Dynamic Click Events
 $("#search-button").on("click", function (event) {
     event.preventDefault();
@@ -34,7 +61,6 @@ $("#search-button").on("click", function (event) {
         $("#tableBody").empty();
         errorDiv.append(errorH3 + "Please type a recipe.</h3>");
     }
-
 });
 
 function showResults(search) {
@@ -54,33 +80,11 @@ function showResults(search) {
         if (results.length > 0) {
             
             addCols(results);
-            // $("#pheader").append(newHeader);
-            // for (var i = 0; i < results.length; i++) {
-            //     var recipeName = results[i].recipe_name;
-            //     var authorName = results[i].author_name;
-            //     var ingredients = results[i].ingredients;
-            //     var directions = results[i].directions;
-            //     var image = results[i].image;
-
-            //     var newRow = $("<tr class='newrow'>").append(
-            //         $("<td>").text(recipeName),
-            //         $("<td>").text(authorName),
-            //         $("<td>").text(ingredients),
-            //         $("<td>").text(directions),
-            //         $("<td>").html("<img id='recipeImage' class='recipeImg' src=" + image + ">"),
-            //     )
-            //     newRow.attr("data-name", results[i].id)
-
-            //     $("#tableBody").append(newRow);
-
-            // }
         } else {
             return errorDiv.append(errorH3 + "Sorry, no matching recipes were found.</h3>");
         }
-
-
     });
-}
+};
 
 var addCols = function (arr) {
     for (var i = 0; i < arr.length; i++) {
@@ -92,12 +96,10 @@ var addCols = function (arr) {
         var image = arr[i].image;
 
         var myCol = $('<div class="col-sm-6 col-md-4 pb-2"></div>');
-        // var myPanel = $('<div class="card card-outline-info" id="' + i + 'Panel"><div class="card-block"><div class="card-title"><span class="movecenter">' + recipeName + '</span><button type="button" class="close" data-target="#' + i + 'Panel" data-dismiss="alert"><span class="float-right"><i class="fa fa-remove"></i></span></button></div><p> ' + authorName + ' </p><img src="' + image +'" class="mx-auto rounded rounded-circle recipeImg"></div></div>');
-        var myPanel = $('<div class="card recipe-card" id="' + i + 'Panel" style="width: 18rem;"><img class="card-img-top" src="'+ image + '" alt="Card image cap"> <div class="card-body text-center"> <h5 class="card-title">' + recipeName + '</h5> <p class="card-text">Author: ' + authorName + '</p> <a href="/recipes/indRecipe/'+ recipeId +'" class="btn btn-primary">Go to full recipe</a></div></div>');
+        var myPanel = $('<div class="card recipe-card" id="' + i + 'Panel" style="width: 18rem;"><img class="card-img-top" src="'+ image + '" alt="Card image cap"> <div class="card-body text-center"> <h5 class="card-title">' + recipeName + '</h5> <p class="card-text">Author: ' + authorName + '</p> <a href="/recipes/indRecipe/'+ recipeId +'" id="selected-recipe" class="btn btn-primary">Go to full recipe</a></div></div>');
         myPanel.appendTo(myCol);
         myCol.appendTo('#contentPanel');
     }
-
 
     $('.close').on('click', function (e) {
         e.stopPropagation();
@@ -106,9 +108,7 @@ var addCols = function (arr) {
     });
 };
 
-// Adding a new recipe in the Create page
-
-// Click event
+// Click event for creating new recipe
 $("#create").on("click", function(event) {
     event.preventDefault();   
     // Making new recipe object
@@ -135,3 +135,17 @@ $("#create").on("click", function(event) {
     $("#directions").val("");
     $("#recipeImage").val("");
 });
+
+
+
+// To delete a recipe ------------------------------------------------- (Anna)
+function deleteRecipe(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/recipes/indRecipe/" + id
+    })
+      .then(function() {
+        getRecipes(postCategorySelect.val());
+      });
+  }
+
