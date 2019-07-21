@@ -25,7 +25,7 @@ module.exports = function (sequelize, DataTypes) { // ** Makes the Recipe Model 
             type: DataTypes.TEXT,
             allowNull: false,
             validate: {
-                len: [6]
+                // len: [6]
             }
         },
         image: {

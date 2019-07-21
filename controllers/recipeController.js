@@ -57,8 +57,24 @@ router.post("/recipes/create", function (req, res) {
     })
 });
 
+
+// Route to the view all html
 router.get("/recipes/viewall", function(req, res){
-    res.render("viewAll");
+    db.Recipe.findAll({}).then(function (recipes) {
+            var allRecipes = {
+                recipe: recipes
+            }
+            res.json(allRecipes);
+        })
+});
+
+router.get("/recipes/viewall/render", function(req, res){
+    db.Recipe.findAll({}).then(function (recipes) {
+            // var allRecipes = {
+            //     recipe: recipes
+            // }
+            res.render("viewAll");
+        })
 });
 
 // ** To delete a recipe
