@@ -19,13 +19,12 @@ var errorH3 = "<br><h3 class='text-center text-light'>";
 // Search Results Dynamic Click Events
 $("#search-button").on("click", function (event) {
     event.preventDefault();
+    $("#feature-carousel").hide();
     errorDiv.empty();
     console.log("Button Works!!!")
     var search = $("#searchQuery").val().trim();
     if (search !== "") {
         $("#contentPanel").empty();
-        $("#pheader").empty();
-        $("#tableBody").empty();
 
         showResults(search);
         $("#searchQuery").val("");
@@ -62,7 +61,7 @@ var addCols = function (arr, element) {
         var image = arr[i].image;
 
         var myCol = $('<div class="col-sm-6 col-md-4 pb-2"></div>');
-        var myPanel = $('<div class="card recipe-card" id="' + i + 'Panel" style="width: 18rem;"><img class="card-img-top" src="' + image + '" alt="Card image cap"> <div class="card-body text-center"> <h5 class="card-title">' + recipeName + '</h5> <p class="card-text">Author: ' + authorName + '</p> <a href="/recipes/indrecipe" id="' + i + '" class="btn btn-primary">Go to full recipe</a></div></div>');
+        var myPanel = $('<div class="card recipe-card" id="' + i + 'Panel" style="width: 18rem;"><img class="card-img-top" src="' + image + '" alt="Card image cap"> <div class="card-body text-center"> <h5 class="card-title">' + recipeName + '</h5> <p class="card-text">Author: ' + authorName + '</p> <a href="/recipes/indrecipe/' + recipeId + '" id="' + i + '" class="test btn btn-primary">Go to full recipe</a></div></div>');
         myPanel.appendTo(myCol);
         myCol.appendTo(element);
     }
@@ -107,7 +106,7 @@ $("#create").on("click", function (event) {
 
 // ============================== VIEW ALL RECIPES CODE ===============================
 $(document).ready(function () {
-    // alert("done loading");
+   // alert("done loading");
     // $.get('/recipes/viewAll/data').then(function (data) {
     // console.log(data);
     showResults2();
@@ -139,13 +138,13 @@ function showResults2() {
 function deleteRecipe(id) {
     
     $.ajax({
-      method: "DELETE",
-      url: "/recipes/indRecipe/" + id
+        method: "DELETE",
+        url: "/recipes/indRecipe/" + id
     })
-      .then(function() {
-        getRecipes(postCategorySelect.val());
-      });
-  }
+        .then(function () {
+            getRecipes(postCategorySelect.val());
+        });
+}
 
 // To update a recipe and bring user to the viewAll page when done ---------------- (Anna)
 function updateRecipe(recipe) {
