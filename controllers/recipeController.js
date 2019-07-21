@@ -12,27 +12,28 @@ router.get("/", function (req, res) {
     res.render("index");
 });
 
+router.get('/recipes/indRecipe', function(req, res){
+    console.log("ONE RECIPE REQ", req.body);
+    res.render('oneRecipe')
+})
+
 //Grab one recipe for indRecipe page
 router.get('/recipes/indRecipe/:id', function(req, res){
-    // console.log("req==================================> ", req);
-    // console.log("res==================================>", res);
-    
     db.Recipe.findOne({
-        where: { 
+        where: {
             id: req.params.id
         }
     }).then(function (data) {
-        // console.log("====DATA====", data);
-        res.render("indRecipe", {data: "data"});
+        console.log("====DATA====", data);
+        res.json(data);
     });
+    
+
 });
 
-router.get('/recipes/indRecipe/', function(req, res){
-    res.render('indRecipe')
-})
 
 router.get('/recipes/searchedRecipes/:searchQuery', function (req, res) {
-    // console.log("TEST============================================", req.params.searchQuery)
+    console.log("TEST============================================", req.params.searchQuery)
     db.Recipe.findAll({
         where: {
             recipe_name: Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('recipe_name')), 'LIKE', '%' + req.params.searchQuery + '%')
@@ -57,23 +58,18 @@ router.post("/recipes/create", function (req, res) {
     })
 });
 
-
-// Route to the view all html
 router.get("/recipes/viewall", function(req, res){
-    db.Recipe.findAll({}).then(function (recipes) {
-            var allRecipes = {
-                recipe: recipes
-            }
-            res.json(allRecipes);
-        })
+    res.render("viewAll");
 });
 
-router.get("/recipes/viewall/render", function(req, res){
-    db.Recipe.findAll({}).then(function (recipes) {
-            // var allRecipes = {
-            //     recipe: recipes
-            // }
-            res.render("viewAll");
+router.get('/recipes/viewAll/data', function (req, res) {
+    console.log("TEST============================================", req.params.searchQuery)
+    db.Recipe.findAll({})
+        .then(function (recipes) {
+            var searchedRecipes = {
+                recipe: recipes
+            }
+            res.json(searchedRecipes);
         })
 });
 
