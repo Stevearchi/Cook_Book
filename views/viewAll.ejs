@@ -1,5 +1,17 @@
+<br><br>
 
+<div class="container">
+    <div class="row" id="viewAll">
 
-<div id = "viewAll">
-
+    </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".btn").on("click", function(){
+        alert($(this).attr("id"));
+    });
+});
+</script>

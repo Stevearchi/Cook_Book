@@ -2,6 +2,20 @@
 var errorDiv = $("#err-message");
 var errorH3 = "<br><h3 class='text-center text-light'>";
 
+
+// VIEW ALL RECIPES EVENT
+$(document).ready(function () {
+
+    $("#view-all").on("click", function () {
+        alert("I've been clicked!");
+        // $.get('/recipes/viewall/render').then(function (data) {
+        //     // res.render(addCols(data));
+        // })
+    });
+
+});
+
+
 // Search Results Dynamic Click Events
 $("#search-button").on("click", function (event) {
     event.preventDefault();
@@ -27,40 +41,12 @@ $("#search-button").on("click", function (event) {
 function showResults(search) {
     $.get('/recipes/searchedRecipes/' + search + '').then(function (data) {
         $("tableBody").empty();
-        console.log(data)
+        console.log("SHOW RESULTS 1 DATA: ", data)
         let results = data.recipe;
-        console.log(results)
-        // Create div to hold all search results
-        var newHeader = $("<tr>").append(
-            $("<th>").text("Recipe Name:").css("font-weight", "Bold"),
-            $("<th>").text("Author:").css("font-weight", "Bold"),
-            $("<th>").text("Ingredients:").css("font-weight", "Bold"),
-            $("<th>").text("Directions:").css("font-weight", "Bold"),
-            $("<th>").text("Image:").css("font-weight", "Bold"),
-        )
+        console.log(results);
         if (results.length > 0) {
-            
-            addCols(results);
-            // $("#pheader").append(newHeader);
-            // for (var i = 0; i < results.length; i++) {
-            //     var recipeName = results[i].recipe_name;
-            //     var authorName = results[i].author_name;
-            //     var ingredients = results[i].ingredients;
-            //     var directions = results[i].directions;
-            //     var image = results[i].image;
 
-            //     var newRow = $("<tr class='newrow'>").append(
-            //         $("<td>").text(recipeName),
-            //         $("<td>").text(authorName),
-            //         $("<td>").text(ingredients),
-            //         $("<td>").text(directions),
-            //         $("<td>").html("<img id='recipeImage' class='recipeImg' src=" + image + ">"),
-            //     )
-            //     newRow.attr("data-name", results[i].id)
-
-            //     $("#tableBody").append(newRow);
-
-            // }
+            addCols(results, "#contentPanel");
         } else {
             return errorDiv.append(errorH3 + "Sorry, no matching recipes were found.</h3>");
         }
@@ -69,7 +55,7 @@ function showResults(search) {
     });
 }
 
-var addCols = function (arr) {
+var addCols = function (arr, element) {
     for (var i = 0; i < arr.length; i++) {
         var recipeId = arr[i].id;
         var recipeName = arr[i].recipe_name;
@@ -80,9 +66,9 @@ var addCols = function (arr) {
 
         var myCol = $('<div class="col-sm-6 col-md-4 pb-2"></div>');
         // var myPanel = $('<div class="card card-outline-info" id="' + i + 'Panel"><div class="card-block"><div class="card-title"><span class="movecenter">' + recipeName + '</span><button type="button" class="close" data-target="#' + i + 'Panel" data-dismiss="alert"><span class="float-right"><i class="fa fa-remove"></i></span></button></div><p> ' + authorName + ' </p><img src="' + image +'" class="mx-auto rounded rounded-circle recipeImg"></div></div>');
-        var myPanel = $('<div class="card recipe-card" id="' + i + 'Panel" style="width: 18rem;"><img class="card-img-top" src="'+ image + '" alt="Card image cap"> <div class="card-body text-center"> <h5 class="card-title">' + recipeName + '</h5> <p class="card-text">Author: ' + authorName + '</p> <a href="/recipes/indRecipe/'+ recipeId +'" class="btn btn-primary">Go to full recipe</a></div></div>');
+        var myPanel = $('<div class="card recipe-card" id="' + i + 'Panel" style="width: 18rem;"><img class="card-img-top" src="' + image + '" alt="Card image cap"> <div class="card-body text-center"> <h5 class="card-title">' + recipeName + '</h5> <p class="card-text">Author: ' + authorName + '</p> <a href="/recipes/indrecipe" id="' + i + '" class="btn btn-primary">Go to full recipe</a></div></div>');
         myPanel.appendTo(myCol);
-        myCol.appendTo('#contentPanel');
+        myCol.appendTo(element);
     }
 
 
@@ -96,8 +82,8 @@ var addCols = function (arr) {
 // Adding a new recipe in the Create page
 
 // Click event
-$("#create").on("click", function(event) {
-    event.preventDefault();   
+$("#create").on("click", function (event) {
+    event.preventDefault();
     // Making new recipe object
 
     var newRecipe = {
@@ -107,14 +93,14 @@ $("#create").on("click", function(event) {
         directions: $("#directions").val().trim(),
         image: $("#recipeImage").val().trim()
     };
-   // AJAX POST - request with jQuery
+    // AJAX POST - request with jQuery
     $.post("/recipes/create", newRecipe)
-        .then(function(data) {
+        .then(function (data) {
 
             alert("Adding new recipe " + data.recipe_name);
         });
 
-   // Empty input fields after submitting
+    // Empty input fields after submitting
     $("#recipeName").val("");
     // $("#author-name").val("");
     $("#ingredients").val("");
@@ -122,3 +108,34 @@ $("#create").on("click", function(event) {
     $("#directions").val("");
     $("#recipeImage").val("");
 });
+
+
+// ============================== VIEW ALL RECIPES CODE ===============================
+$(document).ready(function () {
+    // alert("done loading");
+    // $.get('/recipes/viewAll/data').then(function (data) {
+    // console.log(data);
+    showResults2();
+    // })
+});
+
+function showResults2() {
+    $.get('/recipes/viewAll/data').then(function (data) {
+        $("tableBody").empty();
+        console.log("SHOW RESULTS 2 DATA: ", data);
+        let results = data.recipe;
+        console.log(results);
+        // Create div to hold all search results
+        if (results.length > 0) {
+
+            addCols(results, "#viewAll");
+        } else {
+            return errorDiv.append(errorH3 + "Sorry, no matching recipes were found.</h3>");
+        }
+
+
+    });
+}
+
+// $(this).on("click", function(){
+// });
