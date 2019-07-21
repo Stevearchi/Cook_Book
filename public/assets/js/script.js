@@ -1,22 +1,20 @@
-
 // GLOBAL VARS
 var errorDiv = $("#err-message");
 var errorH3 = "<br><h3 class='text-center text-light'>";
-​
+
 // Click event for View All Recipes
-// document.getElementById("#view-all").addEventListener("click", )
-​
+document.getElementById("#viewall").addEventListener("click", )
+
 $(document).ready(function() {
-​
-    $("#view-all").on("click", function() {
-      alert("I've been clicked!");
-      $.get('/recipes/viewall').then(function(data) {
-            res.render(addCols(data));
-        })
+    ​
+        $("#viewall").on("click", function() {
+          alert("I've been clicked!");
+        //   $.get('/recipes/viewall').then(function(data) {
+        //         res.render(addCols(dbrecipe));
+            })
+        });
+    ​
     });
-​
-});
-​
 // Search Results Dynamic Click Events
 $("#search-button").on("click", function (event) {
     event.preventDefault();
@@ -27,7 +25,7 @@ $("#search-button").on("click", function (event) {
         $("#contentPanel").empty();
         $("#pheader").empty();
         $("#tableBody").empty();
-​
+
         showResults(search);
         $("#searchQuery").val("");
     } else {
@@ -36,8 +34,9 @@ $("#search-button").on("click", function (event) {
         $("#tableBody").empty();
         errorDiv.append(errorH3 + "Please type a recipe.</h3>");
     }
+
 });
-​
+
 function showResults(search) {
     $.get('/recipes/searchedRecipes/' + search + '').then(function (data) {
         $("tableBody").empty();
@@ -55,12 +54,34 @@ function showResults(search) {
         if (results.length > 0) {
             
             addCols(results);
+            // $("#pheader").append(newHeader);
+            // for (var i = 0; i < results.length; i++) {
+            //     var recipeName = results[i].recipe_name;
+            //     var authorName = results[i].author_name;
+            //     var ingredients = results[i].ingredients;
+            //     var directions = results[i].directions;
+            //     var image = results[i].image;
+
+            //     var newRow = $("<tr class='newrow'>").append(
+            //         $("<td>").text(recipeName),
+            //         $("<td>").text(authorName),
+            //         $("<td>").text(ingredients),
+            //         $("<td>").text(directions),
+            //         $("<td>").html("<img id='recipeImage' class='recipeImg' src=" + image + ">"),
+            //     )
+            //     newRow.attr("data-name", results[i].id)
+
+            //     $("#tableBody").append(newRow);
+
+            // }
         } else {
             return errorDiv.append(errorH3 + "Sorry, no matching recipes were found.</h3>");
         }
+
+
     });
-};
-​
+}
+
 var addCols = function (arr) {
     for (var i = 0; i < arr.length; i++) {
         var recipeId = arr[i].id;
@@ -69,25 +90,29 @@ var addCols = function (arr) {
         var ingredients = arr[i].ingredients;
         var directions = arr[i].directions;
         var image = arr[i].image;
-​
+
         var myCol = $('<div class="col-sm-6 col-md-4 pb-2"></div>');
+        // var myPanel = $('<div class="card card-outline-info" id="' + i + 'Panel"><div class="card-block"><div class="card-title"><span class="movecenter">' + recipeName + '</span><button type="button" class="close" data-target="#' + i + 'Panel" data-dismiss="alert"><span class="float-right"><i class="fa fa-remove"></i></span></button></div><p> ' + authorName + ' </p><img src="' + image +'" class="mx-auto rounded rounded-circle recipeImg"></div></div>');
         var myPanel = $('<div class="card recipe-card" id="' + i + 'Panel" style="width: 18rem;"><img class="card-img-top" src="'+ image + '" alt="Card image cap"> <div class="card-body text-center"> <h5 class="card-title">' + recipeName + '</h5> <p class="card-text">Author: ' + authorName + '</p> <a href="/recipes/indRecipe/'+ recipeId +'" class="btn btn-primary">Go to full recipe</a></div></div>');
         myPanel.appendTo(myCol);
         myCol.appendTo('#contentPanel');
     }
-​
+
+
     $('.close').on('click', function (e) {
         e.stopPropagation();
         var $target = $(this).parents('.col-sm-3');
         $target.hide('slow', function () { $target.remove(); });
     });
 };
-​
+
+// Adding a new recipe in the Create page
+
 // Click event
 $("#create").on("click", function(event) {
     event.preventDefault();   
     // Making new recipe object
-​
+
     var newRecipe = {
         recipe_name: $("#recipeName").val().trim(),
         author_name: 'TESTING',
@@ -98,10 +123,10 @@ $("#create").on("click", function(event) {
    // AJAX POST - request with jQuery
     $.post("/recipes/create", newRecipe)
         .then(function(data) {
-​
+
             alert("Adding new recipe " + data.recipe_name);
         });
-​
+
    // Empty input fields after submitting
     $("#recipeName").val("");
     // $("#author-name").val("");
