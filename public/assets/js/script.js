@@ -9,18 +9,30 @@ var res;
 $(document).ready(function() {
   $("#view-all").on("click", function() {
     // alert("View Recipes has been clicked!");
-    $.get('/recipes/viewall').then(function(data) {
-      res = data;
-    });
+    $.when(
+      $.get('/recipes/viewall', function(data) {
+        res = data;
+      }),
+      $.get('/recipes/viewall/render')
+      ).then(function() {
+        showResults(res);
+    })
   });
 });
 
-$(document).onmouseup = function() {
-  alert("onmouseup!!!!!!!!!!!!!!")
-  $.get('/recipes/viewall/render').then(function() {
-    showResults(res);
-  });
-};
+// document.onmouseup = function() {
+//   alert("onmouseup!!!!!!!!!!!!!!")
+//   $.get('/recipes/viewall/render').then(function() {
+//     showResults(res);
+//   });
+// };
+
+
+// function onmouseup () {
+//   document.getElementById
+// }
+
+
 
 //Click event for selected recipe from search results
 $(document).ready(function() {

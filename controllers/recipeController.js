@@ -46,7 +46,7 @@ router.get('/recipes/searchedRecipes/:searchQuery', function (req, res) {
         })
 });
 
-router.get('/recipes/create', function (req, res) {
+router.get('/recipes/create', isLoggedIn, function (req, res) {
     //    res.send("create 'createRecipe.ejs file to render");
     res.render("create");
 });
@@ -119,7 +119,7 @@ router.get('/users/logout', function (req, res) {
 
 router.post('/users/login', passport.authenticate('local-signin',
     {
-        successRedirect: '/users/dashboard',
+        successRedirect: '/recipes/create',
         failureRedirect: '/users/login'
     }
 ));
