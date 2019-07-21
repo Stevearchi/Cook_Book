@@ -4,16 +4,16 @@ var errorH3 = "<br><h3 class='text-center text-light'>";
 
 
 // VIEW ALL RECIPES EVENT
-$(document).ready(function () {
+// $(document).ready(function () {
 
-    $("#view-all").on("click", function () {
-        alert("I've been clicked!");
-        // $.get('/recipes/viewall/render').then(function (data) {
-        //     // res.render(addCols(data));
-        // })
-    });
+//     $("#view-all").on("click", function () {
+//         alert("I've been clicked!");
+//         // $.get('/recipes/viewall/render').then(function (data) {
+//         //     // res.render(addCols(data));
+//         // })
+//     });
 
-});
+// });
 
 
 // Search Results Dynamic Click Events
@@ -35,7 +35,6 @@ $("#search-button").on("click", function (event) {
         $("#tableBody").empty();
         errorDiv.append(errorH3 + "Please type a recipe.</h3>");
     }
-
 });
 
 function showResults(search) {
@@ -50,10 +49,8 @@ function showResults(search) {
         } else {
             return errorDiv.append(errorH3 + "Sorry, no matching recipes were found.</h3>");
         }
-
-
     });
-}
+};
 
 var addCols = function (arr, element) {
     for (var i = 0; i < arr.length; i++) {
@@ -65,12 +62,10 @@ var addCols = function (arr, element) {
         var image = arr[i].image;
 
         var myCol = $('<div class="col-sm-6 col-md-4 pb-2"></div>');
-        // var myPanel = $('<div class="card card-outline-info" id="' + i + 'Panel"><div class="card-block"><div class="card-title"><span class="movecenter">' + recipeName + '</span><button type="button" class="close" data-target="#' + i + 'Panel" data-dismiss="alert"><span class="float-right"><i class="fa fa-remove"></i></span></button></div><p> ' + authorName + ' </p><img src="' + image +'" class="mx-auto rounded rounded-circle recipeImg"></div></div>');
         var myPanel = $('<div class="card recipe-card" id="' + i + 'Panel" style="width: 18rem;"><img class="card-img-top" src="' + image + '" alt="Card image cap"> <div class="card-body text-center"> <h5 class="card-title">' + recipeName + '</h5> <p class="card-text">Author: ' + authorName + '</p> <a href="/recipes/indrecipe" id="' + i + '" class="btn btn-primary">Go to full recipe</a></div></div>');
         myPanel.appendTo(myCol);
         myCol.appendTo(element);
     }
-
 
     $('.close').on('click', function (e) {
         e.stopPropagation();
@@ -139,3 +134,15 @@ function showResults2() {
 
 // $(this).on("click", function(){
 // });
+
+// To delete a recipe ------------------------------------------------- (Anna)
+function deleteRecipe(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/recipes/indRecipe/" + id
+    })
+      .then(function() {
+        getRecipes(postCategorySelect.val());
+      });
+  }
+
