@@ -136,16 +136,27 @@ $("#create").on("click", function(event) {
     $("#recipeImage").val("");
 });
 
-
-
-// To delete a recipe ------------------------------------------------- (Anna)
+// To delete a recipe ------------------------------------------------------------ (Anna)
 function deleteRecipe(id) {
+    
     $.ajax({
       method: "DELETE",
       url: "/recipes/indRecipe/" + id
     })
       .then(function() {
         getRecipes(postCategorySelect.val());
+      });
+  }
+
+// To update a recipe and bring user to the viewAll page when done ---------------- (Anna)
+function updateRecipe(recipe) {
+    $.ajax({
+      method: "PUT",
+      url: "/recipes/viewall",   
+      data: recipe
+    })
+      .then(function() {
+        window.location.href = "/recipes/viewall";
       });
   }
 
