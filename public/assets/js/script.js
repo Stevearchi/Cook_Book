@@ -107,7 +107,7 @@ $("#create").on("click", function (event) {
 
 // ============================== VIEW ALL RECIPES CODE ===============================
 $(document).ready(function () {
-    // alert("done loading");
+    alert("done loading");
     // $.get('/recipes/viewAll/data').then(function (data) {
     // console.log(data);
     showResults2();
