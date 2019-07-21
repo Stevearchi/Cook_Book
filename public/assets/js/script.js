@@ -111,7 +111,7 @@ $(document).ready(function () {
     // console.log(data);
     showResults2();
     // })
-});
+});  
 
 function showResults2() {
     $.get('/recipes/viewAll/data').then(function (data) {
