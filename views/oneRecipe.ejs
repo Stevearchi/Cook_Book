@@ -1,0 +1,120 @@
+<style>
+    body {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2428&q=80');
+
+    /* background-image: url('https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2428&q=80'); */
+    background-position: center;
+    background-size: cover;
+    height: 650px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.recipeImg{
+    height: 200px;
+    width: 200px;
+}
+
+.recipe-card{
+    margin-bottom: 40px;
+}
+/* 
+#contain-carousel{
+    height: 200px;
+} */
+
+.d-block{
+    height: 400px;
+    width: auto;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+.myform{
+    z-index: 100;
+    display: block;
+    margin-right: auto;
+}
+
+#searchButton {
+    background-color: #343a40 !important;
+}
+
+#indBody {
+    background-color: #343a40 !important;
+    /* float: left; */
+}
+
+#recipe_image {
+    width: 240px;
+    height: 350px;
+    object-fit: contain;
+    margin-left: -3em;
+}
+
+#recipeImage {
+    height: 200px;
+    width: auto;
+}
+
+#darken{
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 100%;
+}
+
+#search-button{
+    border-radius: 5px;
+}
+</style>
+<br><br>
+<div class="container">
+    <div class="row center" id="ind-recipe">
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // var id
+
+        var urlArr = window.location.pathname.split('/')
+        var id = urlArr[urlArr.length - 1];
+
+        $.get("/recipes/indRecipe/data/" + id).then(function (data) {
+
+            // var dataArr = [data];
+
+            addCols(data, "#ind-recipe");
+
+        });
+
+        var addCols = function (arr, element) {
+            var recipeId = arr.id;
+            var recipeName = arr.recipe_name;
+            var authorName = arr.author_name;
+            var ingredients = arr.ingredients;
+            var directions = arr.directions;
+            var image = arr.image;
+            var ingredArray = ingredients.split(", ");
+
+
+            var ingreds = function(arr) {
+
+                for (var i = 0; i < arr.length; i++) {
+                    $("#ing-list").append("<li>" + arr[i] + "</li>");
+                };
+            };
+            
+            var myCol = $('<div class="col-sm-6 col-md-6 pb-2 offset-3"></div>');
+            var myPanel = $('<div class="center text-light"><img class="card-img-top" src="' + image + '" alt="Card image cap"> <div class="card-body text-center"> <h5 class="card-title">' + recipeName + '</h5><ul id="ing-list"></ul><p>' + directions + '</p> <p class="card-text">Author: ' + authorName + '</p></div></div>');
+            myPanel.appendTo(myCol);
+            myCol.appendTo(element);
+            ingreds(ingredArray);
+
+        };
+    });
+</script>
