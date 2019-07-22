@@ -21,7 +21,7 @@ router.get('/recipes/indRecipe/:id', function(req, res){
             id: req.params.id
         }
     }).then(function (data) {
-        console.log("====DATA====", data);
+        // console.log("====DATA====", data);
         res.render("indRecipe", {data: "data"});
     });
     

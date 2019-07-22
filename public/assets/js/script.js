@@ -113,7 +113,7 @@ $("#create").on("click", function(event) {
 
             alert("Adding new recipe " + data.recipe_name);
         });
-
+        
    // Empty input fields after submitting
     $("#recipeName").val("");
     // $("#author-name").val("");
@@ -122,3 +122,4 @@ $("#create").on("click", function(event) {
     $("#directions").val("");
     $("#recipeImage").val("");
 });
+
