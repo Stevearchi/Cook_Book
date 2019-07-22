@@ -68,8 +68,9 @@
     border-radius: 5px;
 }
 </style>
+<br><br>
 <div class="container">
-    <div class="row" id="ind-recipe">
+    <div class="row center" id="ind-recipe">
 
     </div>
 </div>
@@ -99,11 +100,21 @@
             var ingredients = arr.ingredients;
             var directions = arr.directions;
             var image = arr.image;
+            var ingredArray = ingredients.split(", ");
+            console.log(ingredArray);
 
-            var myCol = $('<div class="col-sm-6 col-md-4 pb-2"></div>');
-            var myPanel = $('<div class="center"><img class="card-img-top" src="' + image + '" alt="Card image cap"> <div class="card-body text-center"> <h5 class="card-title">' + recipeName + '</h5><p>' + ingredients + '</p><p>' + directions + '</p> <p class="card-text">Author: ' + authorName + '</p></div></div>');
+            var ingreds = function(arr) {
+
+                for (var i = 0; i < arr.length; i++) {
+                    $("#ing-list").append("<li>" + arr[i] + "</li>");
+                };
+            };
+            
+            var myCol = $('<div class="col-sm-6 col-md-6 pb-2 offset-3"></div>');
+            var myPanel = $('<div class="center text-light"><img class="card-img-top" src="' + image + '" alt="Card image cap"> <div class="card-body text-center"> <h5 class="card-title">' + recipeName + '</h5><ul id="ing-list"></ul><p>' + directions + '</p> <p class="card-text">Author: ' + authorName + '</p></div></div>');
             myPanel.appendTo(myCol);
             myCol.appendTo(element);
+            ingreds(ingredArray);
             console.log("running add cols funtcion");
         };
     });
