@@ -6,7 +6,7 @@ var errorH3 = "<br><h3 class='text-center text-light'>";
 $("#search-button").on("click", function (event) {
     event.preventDefault();
     errorDiv.empty();
-    console.log("Button Works!!!")
+
     var search = $("#searchQuery").val().trim();
     if (search !== "") {
         $("#contentPanel").empty();
@@ -27,9 +27,8 @@ $("#search-button").on("click", function (event) {
 function showResults(search) {
     $.get('/recipes/searchedRecipes/' + search + '').then(function (data) {
         $("tableBody").empty();
-        console.log(data)
+
         let results = data.recipe;
-        console.log(results)
         // Create div to hold all search results
         var newHeader = $("<tr>").append(
             $("<th>").text("Recipe Name:").css("font-weight", "Bold"),

@@ -21,7 +21,7 @@ $("#search-button").on("click", function (event) {
     event.preventDefault();
     $("#feature-carousel").hide();
     errorDiv.empty();
-    console.log("Button Works!!!")
+
     var search = $("#searchQuery").val().trim();
     if (search !== "") {
         $("#contentPanel").empty();
@@ -39,9 +39,7 @@ $("#search-button").on("click", function (event) {
 function showResults(search) {
     $.get('/recipes/searchedRecipes/' + search + '').then(function (data) {
         $("tableBody").empty();
-        console.log("SHOW RESULTS 1 DATA: ", data)
         let results = data.recipe;
-        console.log(results);
         if (results.length > 0) {
 
             addCols(results, "#contentPanel");
@@ -106,19 +104,16 @@ $("#create").on("click", function (event) {
 
 // ============================== VIEW ALL RECIPES CODE ===============================
 $(document).ready(function () {
-   // alert("done loading");
-    // $.get('/recipes/viewAll/data').then(function (data) {
-    // console.log(data);
+
     showResults2();
-    // })
+
 });  
 
 function showResults2() {
     $.get('/recipes/viewAll/data').then(function (data) {
         $("tableBody").empty();
-        console.log("SHOW RESULTS 2 DATA: ", data);
+
         let results = data.recipe;
-        console.log(results);
         // Create div to hold all search results
         if (results.length > 0) {
 

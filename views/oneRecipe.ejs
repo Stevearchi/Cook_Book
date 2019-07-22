@@ -80,17 +80,16 @@
 <script type="text/javascript">
     $(document).ready(function () {
         // var id
-        console.log("Window params: ", window.params);
-        console.log("Window location: ", window.location.pathname.split('/'));
+
         var urlArr = window.location.pathname.split('/')
         var id = urlArr[urlArr.length - 1];
-        console.log("Last index", id);
+
         $.get("/recipes/indRecipe/data/" + id).then(function (data) {
-            console.log(data);
+
             // var dataArr = [data];
-            console.log("Before adding cols");
+
             addCols(data, "#ind-recipe");
-            console.log("Loaded Individual Recipe");
+
         });
 
         var addCols = function (arr, element) {
@@ -101,7 +100,7 @@
             var directions = arr.directions;
             var image = arr.image;
             var ingredArray = ingredients.split(", ");
-            console.log(ingredArray);
+
 
             var ingreds = function(arr) {
 
@@ -115,8 +114,7 @@
             myPanel.appendTo(myCol);
             myCol.appendTo(element);
             ingreds(ingredArray);
-            console.log("running add cols funtcion");
+
         };
     });
 </script>
-///
