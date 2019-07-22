@@ -1,4 +1,4 @@
-// ** Dependencies
+// ** Dependencies ------------------------------
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const passport = require('passport');

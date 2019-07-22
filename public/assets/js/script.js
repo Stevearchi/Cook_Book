@@ -111,7 +111,7 @@ $(document).ready(function () {
     // console.log(data);
     showResults2();
     // })
-});
+});  
 
 function showResults2() {
     $.get('/recipes/viewAll/data').then(function (data) {
@@ -136,6 +136,7 @@ function showResults2() {
 
 // To delete a recipe ------------------------------------------------- (Anna)
 function deleteRecipe(id) {
+    
     $.ajax({
         method: "DELETE",
         url: "/recipes/indRecipe/" + id
@@ -144,4 +145,16 @@ function deleteRecipe(id) {
             getRecipes(postCategorySelect.val());
         });
 }
+
+// To update a recipe and bring user to the viewAll page when done ---------------- (Anna)
+function updateRecipe(recipe) {
+    $.ajax({
+      method: "PUT",
+      url: "/recipes/viewall",   
+      data: recipe
+    })
+      .then(function() {
+        window.location.href = "/recipes/viewall";
+      });
+  }
 
